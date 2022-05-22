@@ -9,12 +9,12 @@ struct VelAccResolver: SgArColorResolver {
         let vel = velocity.norm
         let acc = acceleration.norm
         let hue = v.normalized(vel)
-        let sat = easing(a.normalized(acc))
+        let sat = easeOutQuad(a.normalized(acc))
         return NSColor(hue: hue, saturation: sat, brightness: 1, alpha: 1)
     }
 
-    func easing(_ x: CGFloat) -> CGFloat {
-        return x * (2 - x) // ease out quad
+    func easeOutQuad(_ x: CGFloat) -> CGFloat {
+	return 1 - (1 - x) * (1 - x)
     }
 }
 
