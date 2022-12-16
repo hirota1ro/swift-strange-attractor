@@ -50,8 +50,19 @@ extension StrangeAttractor.Image {
           .translatedBy(x: size.width/2, y: size.height/2)
           .scaledBy(x: scale, y: scale)
           .translatedBy(x: tr.x, y: tr.y)
-        let colorResolver = VelAccResolver(v: visual.v, a: visual.a)
-        return SgArRenderer(size: size, screen: screen, colorResolver: colorResolver)
+        let br: SgArBrightnessResolver = dark ? BlackBackBrightnessResolver() : WhiteBackBrightnessResolver()
+        let colorResolver = VelAccResolver(v: visual.v, a: visual.a, b: br)
+        var rdr = SgArRenderer(size: size, screen: screen, colorResolver: colorResolver)
+        if transparent {
+            rdr.backgroundColor = nil
+        } else {
+            if dark {
+                rdr.backgroundColor = .black
+            } else {
+                rdr.backgroundColor = .white
+            }
+        }
+        return rdr
     }
 
     func decorate(image: NSImage, text: String) -> NSImage {

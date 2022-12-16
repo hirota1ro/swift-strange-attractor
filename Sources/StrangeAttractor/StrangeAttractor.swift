@@ -33,6 +33,12 @@ extension StrangeAttractor {
         @Option(name: .shortAndLong, help: "gamma adjust input power (enabled when density>1)")
         var gamma: Float = 1
 
+        @Flag(name: .long, inversion: .prefixedNo, help: "If true, assumes a black background")
+        var dark: Bool = true
+
+        @Flag(name: .long, help: "If false, fill background opaque color")
+        var transparent: Bool = false
+
         @Option(name: [.customShort("s"), .long], help: "scale factor")
         var scaleFactor: Float = 0.95
 
