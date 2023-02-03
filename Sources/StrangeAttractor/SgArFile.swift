@@ -172,6 +172,11 @@ class SgArFactories {
             return SgAr.SprottElhadj(a:try param.flt("a"), b:try param.flt("b"))
         }
     }
+    struct ModifiedLozi: SgArFactory {
+        func create(param: SgArParam) throws -> SgArFormula {
+            return SgAr.ModifiedLozi(a:try param.flt("a"), b:try param.flt("b"))
+        }
+    }
 }
 
 extension SgArFactories {
@@ -195,7 +200,8 @@ extension SgArFactories {
       "ChossatGolubitsky": ChossatGolubitsky(),
       "Lorenz": Lorenz(),
       "Cathala": Cathala(),
-      "SprottElhadj": SprottElhadj()
+      "SprottElhadj": SprottElhadj(),
+      "ModifiedLozi": ModifiedLozi()
     ]
 
     static func obtain(name: String) -> SgArFactory? {
