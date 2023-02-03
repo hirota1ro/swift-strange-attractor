@@ -162,6 +162,11 @@ class SgArFactories {
             return SgAr.Lorenz(a:try param.flt("a"), b:try param.flt("b"))
         }
     }
+    struct Cathala: SgArFactory {
+        func create(param: SgArParam) throws -> SgArFormula {
+            return SgAr.Cathala(a:try param.flt("a"), b:try param.flt("b"))
+        }
+    }
 }
 
 extension SgArFactories {
@@ -183,7 +188,8 @@ extension SgArFactories {
       "CubicStrange": CubicStrange(),
       "QuarticStrange": QuarticStrange(),
       "ChossatGolubitsky": ChossatGolubitsky(),
-      "Lorenz": Lorenz()
+      "Lorenz": Lorenz(),
+      "Cathala": Cathala()
     ]
 
     static func obtain(name: String) -> SgArFactory? {
