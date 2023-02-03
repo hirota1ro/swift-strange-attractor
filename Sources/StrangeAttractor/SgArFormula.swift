@@ -387,4 +387,19 @@ extension SgAr {
         var head: [String] { return ["#name", "a", "b"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2))" }
     }
+
+    struct SprottElhadj: SgArFormula {
+        let a: CGFloat
+        let b: CGFloat
+        var start: CGPoint { return CGPoint(x: 0.5, y: 0.5) }
+        func next(x: CGFloat, y: CGFloat) -> CGPoint {
+            let xnew = -a*x/(1 + y*y)
+            let ynew = x + b*y
+            return CGPoint(x: xnew, y: ynew)
+        }
+        var json: [String: Any] { return ["name":name, "a":a, "b":b] }
+        var csv: [String] { return [name, "\(a)", "\(b)"] }
+        var head: [String] { return ["#name", "a", "b"] }
+        var description: String { return "\(name)(a=\(a.f2),b=\(b.f2))" }
+    }
 }

@@ -167,6 +167,11 @@ class SgArFactories {
             return SgAr.Cathala(a:try param.flt("a"), b:try param.flt("b"))
         }
     }
+    struct SprottElhadj: SgArFactory {
+        func create(param: SgArParam) throws -> SgArFormula {
+            return SgAr.SprottElhadj(a:try param.flt("a"), b:try param.flt("b"))
+        }
+    }
 }
 
 extension SgArFactories {
@@ -189,7 +194,8 @@ extension SgArFactories {
       "QuarticStrange": QuarticStrange(),
       "ChossatGolubitsky": ChossatGolubitsky(),
       "Lorenz": Lorenz(),
-      "Cathala": Cathala()
+      "Cathala": Cathala(),
+      "SprottElhadj": SprottElhadj()
     ]
 
     static func obtain(name: String) -> SgArFactory? {
