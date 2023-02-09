@@ -51,68 +51,51 @@ enum SgArError: Error {
     case missing(String, String)
 }
 
-enum SgArParamType {
-    case integer
-    case float
-    case string
-}
-
-struct SgArArg {
-    let name: String
-    let type: SgArParamType
-}
-extension SgArArg {
-    static func i(_ name: String) -> SgArArg { return SgArArg(name: name, type: .integer) }
-    static func f(_ name: String) -> SgArArg { return SgArArg(name: name, type: .float) }
-    static func s(_ name: String) -> SgArArg { return SgArArg(name: name, type: .string) }
+enum SgArArgType {
+    case i(String, ClosedRange<Int>)     // integer(key, range)
+    case f(String, ClosedRange<CGFloat>) // CGfloat(key, range)
+    case s(String, Int)                  // AYsystem(key, count)
 }
 
 struct SgArParam {
     let dict: [String: Any]
 }
 extension SgArParam {
-    static func build(args: [SgArArg], dict: [String: Any]) throws -> SgArParam {
+    static func build(args: [SgArArgType], dict: [String: Any]) throws -> SgArParam {
         var d: [String: Any] = [:]
         for arg in args {
-            let name = arg.name
-            var val: Any? = nil
-            switch arg.type {
-            case .integer:
-                val = SgArParam.asInt(dict, name)
-            case .float:
-                val = SgArParam.asFloat(dict, name)
-            case .string:
-                val = SgArParam.asStr(dict, name)
-            }
-            if let v = val {
-                d[name] = v
-            } else {
-                throw SgArError.noParam(name)
+            switch arg {
+            case let .i(key, _):
+                d[key] = try SgArParam.asInt(dict, key)
+            case let .f(key, _):
+                d[key] = try SgArParam.asFloat(dict, key)
+            case let .s(key, _):
+                d[key] = try SgArParam.asStr(dict, key)
             }
         }
         return SgArParam(dict: d)
     }
-    static func asInt(_ dict: [String: Any], _ key: String) -> Int? {
+    static func asInt(_ dict: [String: Any], _ key: String) throws -> Int {
         if let val = dict[key] {
             if let ival = Int("\(val)") {
                 return ival
             }
         }
-        return nil
+        throw SgArError.noParam(key)
     }
-    static func asFloat(_ dict: [String: Any], _ key: String) -> CGFloat? {
+    static func asFloat(_ dict: [String: Any], _ key: String) throws -> CGFloat {
         if let val = dict[key] {
             if let fval = Float("\(val)") {
                 return CGFloat(fval)
             }
         }
-        return nil
+        throw SgArError.noParam(key)
     }
-    static func asStr(_ dict: [String: Any], _ key: String) -> String? {
+    static func asStr(_ dict: [String: Any], _ key: String) throws -> String {
         if let val = dict[key] {
             return "\(val)"
         }
-        return nil
+        throw SgArError.noParam(key)
     }
 }
 extension SgArParam {

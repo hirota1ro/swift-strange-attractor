@@ -1,13 +1,13 @@
 import Foundation
 
 protocol SgArFactory {
-    var args: [SgArArg] { get }
+    var args: [SgArArgType] { get }
     func create(param: SgArParam) -> SgArFormula
 }
 
 class SgArFactories {
     struct Bedhead: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b")] }
+        var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -15,7 +15,7 @@ class SgArFactories {
         }
     }
     struct Clifford: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c"), .f("d")] }
+        var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-3...3), .f("d",-3...3)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -25,7 +25,7 @@ class SgArFactories {
         }
     }
     struct FractalDream: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c"), .f("d")] }
+        var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-0.5...1.5), .f("d", -0.5...1.5)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -35,7 +35,7 @@ class SgArFactories {
         }
     }
     struct GumowskiMira: SgArFactory {
-        var args: [SgArArg] { return [.i("f"), .i("g"), .f("a"), .f("s"), .f("m")] }
+        var args: [SgArArgType] { return [.i("f",1...2), .i("g",1...2), .f("a",-1...1), .f("s",-1...1), .f("m",-1...1)] }
         func create(param: SgArParam) -> SgArFormula {
             let f = param.int("f")
             let g = param.int("g")
@@ -46,7 +46,7 @@ class SgArFactories {
         }
     }
     struct Hopalong: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c")] }
+        var args: [SgArArgType] { return [.f("a",0...10), .f("b",0...10), .f("c",0...10)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -55,7 +55,7 @@ class SgArFactories {
         }
     }
     struct JasonRampe1: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c"), .f("d")] }
+        var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-3...3), .f("d",-3...3)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -65,7 +65,7 @@ class SgArFactories {
         }
     }
     struct JasonRampe2: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c"), .f("d")] }
+        var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-3...3), .f("d",-3...3)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -75,7 +75,7 @@ class SgArFactories {
         }
     }
     struct JasonRampe3: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c"), .f("d")] }
+        var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-3...3), .f("d",-3...3)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -85,7 +85,7 @@ class SgArFactories {
         }
     }
     struct JohnnySvensson: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c"), .f("d")] }
+        var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-3...3), .f("d",-3...3)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -95,7 +95,7 @@ class SgArFactories {
         }
     }
     struct PeterDeJong: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c"), .f("d")] }
+        var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-3...3), .f("d",-3...3)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -105,7 +105,7 @@ class SgArFactories {
         }
     }
     struct SymmetricIcon: SgArFactory {
-        var args: [SgArArg] { return [.f("l"), .f("a"), .f("b"), .f("g"), .f("o"), .i("d")] }
+        var args: [SgArArgType] { return [.f("l",-3...3), .f("a",-3...5), .f("b",-17...2), .f("g",-1...1), .f("o",-0.2...0.2), .i("d",3...24)] }
         func create(param: SgArParam) -> SgArFormula {
             let l = param.flt("l")
             let a = param.flt("a")
@@ -117,7 +117,7 @@ class SgArFactories {
         }
     }
     struct Tinkerbell: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c"), .f("d"), .f("x0"), .f("y0")] }
+        var args: [SgArArgType] { return [.f("a",-1...1), .f("b",-1...1), .f("c",-2...2), .f("d",-1...1), .f("x0",-0.01...0.01), .f("y0",-0.01...0.01)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -129,28 +129,28 @@ class SgArFactories {
         }
     }
     struct QuadraticStrange: SgArFactory {
-        var args: [SgArArg] { return [.s("a")] }
+        var args: [SgArArgType] { return [.s("a", 12)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.str("a")
             return SgAr.QuadraticStrange(a)
         }
     }
     struct CubicStrange: SgArFactory {
-        var args: [SgArArg] { return [.s("a")] }
+        var args: [SgArArgType] { return [.s("a", 20)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.str("a")
             return SgAr.CubicStrange(a)
         }
     }
     struct QuarticStrange: SgArFactory {
-        var args: [SgArArg] { return [.s("a")] }
+        var args: [SgArArgType] { return [.s("a", 30)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.str("a")
             return SgAr.QuarticStrange(a)
         }
     }
     struct ChossatGolubitsky: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b"), .f("c"), .f("d")] }
+        var args: [SgArArgType] { return [.f("a",-2...2), .f("b",-0.2...0.2), .f("c",-3...3), .f("d",-1...1)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -160,7 +160,7 @@ class SgArFactories {
         }
     }
     struct Lorenz: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b")] }
+        var args: [SgArArgType] { return [.f("a",-2...2), .f("b",-2...2)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -168,7 +168,7 @@ class SgArFactories {
         }
     }
     struct Cathala: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b")] }
+        var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -176,7 +176,7 @@ class SgArFactories {
         }
     }
     struct SprottElhadj: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b")] }
+        var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
@@ -184,7 +184,7 @@ class SgArFactories {
         }
     }
     struct ModifiedLozi: SgArFactory {
-        var args: [SgArArg] { return [.f("a"), .f("b")] }
+        var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
         func create(param: SgArParam) -> SgArFormula {
             let a = param.flt("a")
             let b = param.flt("b")
