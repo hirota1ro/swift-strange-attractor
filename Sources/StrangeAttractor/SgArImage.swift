@@ -7,8 +7,9 @@ extension StrangeAttractor.Image {
 
     mutating func run() throws {
         let algorithm = SgAr()
-        let formulas = try SgArFile.read(from: inputFile)
-        for formula in formulas {
+        let drivers = try SgArFile.read(from: inputFile)
+        for driver in drivers {
+            let formula = driver.formula
             let image = try createImage(algorithm: algorithm, formula: formula)
             try save(image: image, toFileName: "\(formula)")
         }

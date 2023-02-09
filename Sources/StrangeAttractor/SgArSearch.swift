@@ -7,8 +7,8 @@ extension StrangeAttractor.Search {
             print("failed: \(name)")
             return
         }
-        let driver = SgArSearchUtil(count: count, iterations:iterations, threshold:threshold, concession:concession)
-        let found = driver.search(source: RandomSearchSource(generator: generator))
+        let util = SgArSearchUtil(count: count, iterations:iterations, threshold:threshold, concession:concession)
+        let found = util.search(source: RandomSearchSource(generator: generator))
         if let outputFile = outputFile {
             let json = found.map { $0.json }
             do {

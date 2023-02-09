@@ -3,8 +3,8 @@ import Foundation
 extension StrangeAttractor.Export {
 
     mutating func run() throws {
-        let formulas = try SgArFile.read(from: inputFile)
-        let text = try createText(formulas: formulas)
+        let drivers = try SgArFile.read(from: inputFile)
+        let text = try createText(drivers: drivers)
         if let filePath = outputFile {
             try save(text: text, toFilePath: filePath)
         } else {
@@ -12,11 +12,12 @@ extension StrangeAttractor.Export {
         }
     }
 
-    func createText(formulas: [SgArFormula]) throws -> String {
+    func createText(drivers: [SgArDriver]) throws -> String {
         let algorithm = SgAr()
         var buf: [String] = []
         var prev: String = ""
-        for formula in formulas {
+        for driver in drivers {
+            let formula = driver.formula
             if formula.name != prev {
                 let hdr = formula.head + SgArVisual.head
                 buf.append(hdr.joined(separator: ", "))
