@@ -110,4 +110,24 @@ struct SgArDriver {
 }
 extension SgArDriver {
     var formula: SgArFormula { return factory.create(param: param) }
+    func createRandomly() -> SgArDriver {
+        return SgArDriver(factory: factory, param: factory.createParamRandomly())
+    }
+}
+
+extension SgArFactory {
+    func createParamRandomly() -> SgArParam {
+        var d: [String: Any] = [:]
+        for arg in args {
+            switch arg {
+            case let .i(key, range):
+                d[key] = Int.random(in: range)
+            case let .f(key, range):
+                d[key] = CGFloat.random(in: range)
+            case let .s(key, count):
+                d[key] = AYSystem.random(count: count)
+            }
+        }
+        return SgArParam(dict: d)
+    }
 }

@@ -5,6 +5,7 @@ protocol SgArFactory {
     func create(param: SgArParam) -> SgArFormula
 }
 
+
 class SgArFactories {
     struct Bedhead: SgArFactory {
         var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }

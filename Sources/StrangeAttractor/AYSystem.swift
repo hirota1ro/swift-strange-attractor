@@ -27,4 +27,9 @@ class AYSystem {
     static func clamp(_ value: CGFloat) -> CGFloat {
         return min(max(-1.2, value), 1.2)
     }
+
+    static func random(count: Int) -> String {
+        let a: [CGFloat] = (0 ..< count).map { _ in return CGFloat.random(in: -1.2 ... 1.2) }
+        return AYSystem.encode(a)
+    }
 }
