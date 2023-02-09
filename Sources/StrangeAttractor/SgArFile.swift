@@ -113,6 +113,22 @@ extension SgArDriver {
     func createRandomly() -> SgArDriver {
         return SgArDriver(factory: factory, param: factory.createParamRandomly())
     }
+    func mutated(factor: CGFloat) -> SgArDriver {
+        var d: [String: Any] = [:]
+        for arg in factory.args {
+            switch arg {
+            case let .i(key, _):
+                let Δ = Int.random(in: -Int(factor) ... Int(factor))
+                d[key] = param.int(key) + Δ
+            case let .f(key, _):
+                let Δ = CGFloat.random(in: -factor ... factor)
+                d[key] = param.flt(key) + Δ
+            case let .s(key, _):
+                d[key] = AYSystem.mutated(param.str(key), factor: factor)
+            }
+        }
+        return SgArDriver(factory: factory, param: SgArParam(dict: d))
+    }
 }
 
 extension SgArFactory {

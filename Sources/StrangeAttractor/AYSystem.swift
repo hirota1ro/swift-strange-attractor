@@ -32,4 +32,10 @@ class AYSystem {
         let a: [CGFloat] = (0 ..< count).map { _ in return CGFloat.random(in: -1.2 ... 1.2) }
         return AYSystem.encode(a)
     }
+
+    static func mutated(_ code: String, factor: CGFloat) -> String {
+        let old = AYSystem.decode(code)
+        let new: [CGFloat] = old.map { return $0 + CGFloat.random(in: -factor ... factor) }
+        return AYSystem.encode(new)
+    }
 }
