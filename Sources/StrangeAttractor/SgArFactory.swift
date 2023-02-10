@@ -4,7 +4,9 @@ protocol SgArFactory {
     var args: [SgArArgType] { get }
     func create(param: SgArParam) -> SgArFormula
 }
-
+extension SgArFactory {
+    var name: String { return String(describing: type(of: self)) }
+}
 
 class SgArFactories {
     struct Bedhead: SgArFactory {

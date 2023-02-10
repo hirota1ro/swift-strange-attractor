@@ -129,6 +129,21 @@ extension SgArDriver {
         }
         return SgArDriver(factory: factory, param: SgArParam(dict: d))
     }
+    var name: String { return factory.name }
+    var json: [String: Any] {
+        var d: [String: Any] = ["name":name]
+        for arg in factory.args {
+            switch arg {
+            case let .i(key, _):
+                d[key] = param.int(key)
+            case let .f(key, _):
+                d[key] = param.flt(key)
+            case let .s(key, _):
+                d[key] = param.str(key)
+            }
+        }
+        return d
+    }
 }
 
 extension SgArFactory {

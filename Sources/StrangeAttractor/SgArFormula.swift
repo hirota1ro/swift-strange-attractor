@@ -4,7 +4,6 @@ protocol SgArFormula: CustomStringConvertible {
     var start: CGPoint { get }
     func next(x: CGFloat, y: CGFloat) -> CGPoint
     var name: String { get }
-    var json: [String: Any] { get }
     var head: [String] { get }
     var csv: [String] { get }
 }
@@ -24,7 +23,6 @@ extension SgAr {
             let ynew  = x+sin(y)/b
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b] }
         var csv: [String] { return [name, "\(a)", "\(b)"] }
         var head: [String] { return ["#name", "a", "b"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2))" }
@@ -41,7 +39,6 @@ extension SgAr {
             let ynew  = sin(b*x)+d*cos(b*y)
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c, "d":d] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)", "\(d)"] }
         var head: [String] { return ["#name", "a", "b", "c", "d"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2),d=\(d.f2))" }
@@ -58,7 +55,6 @@ extension SgAr {
             let ynew  = sin(x*a)+d*sin(y*a)
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c, "d":d] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)", "\(d)"] }
         var head: [String] { return ["#name", "a", "b", "c", "d"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2),d=\(d.f2))" }
@@ -105,7 +101,6 @@ extension SgAr {
         }
         var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint { return f(x, y) }
-        var json: [String: Any] { return ["name":name, "f":nf, "g":ng, "a":alpha, "s":sigma, "mu":mu] }
         var csv: [String] { return [name, "\(nf)", "\(ng)", "\(alpha)", "\(sigma)", "\(mu)"] }
         var head: [String] { return ["#name", "f", "g", "alpha", "sigma", "mu"] }
         var description: String { return "\(name)((F,G)=(\(nf),\(ng)),α=\(alpha.f2),σ=\(sigma.f2),μ=\(mu.f2))" }
@@ -121,7 +116,6 @@ extension SgAr {
             let ynew  = a-x-1
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)"] }
         var head: [String] { return ["#name", "a", "b", "c"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2))" }
@@ -138,7 +132,6 @@ extension SgAr {
             let ynew  = cos(x*a) + d*sin(y*a)
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c, "d":d] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)", "\(d)"] }
         var head: [String] { return ["#name", "a", "b", "c", "d"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2),d=\(d.f2))" }
@@ -155,7 +148,6 @@ extension SgAr {
             let ynew  = cos(x*a) + d*cos(y*a)
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c, "d":d] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)", "\(d)"] }
         var head: [String] { return ["#name", "a", "b", "c", "d"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2),d=\(d.f2))" }
@@ -172,7 +164,6 @@ extension SgAr {
             let ynew  = cos(x*a) + d*sin(y*a)
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c, "d":d] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)", "\(d)"] }
         var head: [String] { return ["#name", "a", "b", "c", "d"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2),d=\(d.f2))" }
@@ -189,7 +180,6 @@ extension SgAr {
             let ynew  = c*cos(x*a)+cos(y*b)
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c, "d":d] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)", "\(d)"] }
         var head: [String] { return ["#name", "a", "b", "c", "d"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2),d=\(d.f2))" }
@@ -206,7 +196,6 @@ extension SgAr {
             let ynew  = sin(x*c)-cos(y*d)
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c, "d":d] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)", "\(d)"] }
         var head: [String] { return ["#name", "a", "b", "c", "d"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2),d=\(d.f2))" }
@@ -243,7 +232,6 @@ extension SgAr {
             let ynew  = p*y - γ*zimag + ω*x
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "l":λ, "a":α, "b":β, "g":γ, "o":ω, "d":d] }
         var csv: [String] { return [name, "\(λ)", "\(α)", "\(β)", "\(γ)", "\(ω)", "\(d)"] }
         var head: [String] { return ["#name", "λ", "α", "β", "γ", "ω", "d"] }
         var description: String { return "\(name)(λ=\(λ.f2),α=\(α.f2),β=\(β.f2),γ=\(γ.f2),ω=\(ω.f2),d=\(d))" }
@@ -262,7 +250,6 @@ extension SgAr {
             let ynew  = 2*x*y + c*x + d*y
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c, "d":d, "x0":x0, "y0":y0] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)", "\(d)", "\(x0)", "\(y0)"] }
         var head: [String] { return ["#name", "a", "b", "c", "d", "x0", "y0"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2),d=\(d.f2),x0=\(x0.f2),y0=\(y0.f2))" }
@@ -284,7 +271,6 @@ extension SgAr {
             return CGPoint(x: xnew, y: ynew)
         }
         var code: String { return AYSystem.encode(a) }
-        var json: [String: Any] { return ["name":name, "a":code] }
         var csv: [String] { return [name, "\(code)"] }
         var head: [String] { return ["#name", "code"] }
         var description: String { return "\(name)(\"\(code)\")" }
@@ -308,7 +294,6 @@ extension SgAr {
             return CGPoint(x: xnew, y: ynew)
         }
         var code: String { return AYSystem.encode(a) }
-        var json: [String: Any] { return ["name":name, "a":code] }
         var csv: [String] { return [name, "\(code)"] }
         var head: [String] { return ["#name", "code"] }
         var description: String { return "\(name)(\"\(code)\")" }
@@ -334,7 +319,6 @@ extension SgAr {
             return CGPoint(x: xnew, y: ynew)
         }
         var code: String { return AYSystem.encode(a) }
-        var json: [String: Any] { return ["name":name, "a":code] }
         var csv: [String] { return [name, "\(code)"] }
         var head: [String] { return ["#name", "code"] }
         var description: String { return "\(name)(\"\(code)\")" }
@@ -352,7 +336,6 @@ extension SgAr {
             let ynew  = A * y - 2 * d * x * y
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b, "c":c, "d":d] }
         var csv: [String] { return [name, "\(a)", "\(b)", "\(c)", "\(d)"] }
         var head: [String] { return ["#name", "a", "b", "c", "d"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2),c=\(c.f2),d=\(d.f2))" }
@@ -367,7 +350,6 @@ extension SgAr {
             let ynew  = (1 - b) * y + b * x * x
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b] }
         var csv: [String] { return [name, "\(a)", "\(b)"] }
         var head: [String] { return ["#name", "a", "b"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2))" }
@@ -382,7 +364,6 @@ extension SgAr {
             let ynew = b + x*x
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b] }
         var csv: [String] { return [name, "\(a)", "\(b)"] }
         var head: [String] { return ["#name", "a", "b"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2))" }
@@ -397,7 +378,6 @@ extension SgAr {
             let ynew = x + b*y
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b] }
         var csv: [String] { return [name, "\(a)", "\(b)"] }
         var head: [String] { return ["#name", "a", "b"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2))" }
@@ -412,7 +392,6 @@ extension SgAr {
             let ynew = b * x
             return CGPoint(x: xnew, y: ynew)
         }
-        var json: [String: Any] { return ["name":name, "a":a, "b":b] }
         var csv: [String] { return [name, "\(a)", "\(b)"] }
         var head: [String] { return ["#name", "a", "b"] }
         var description: String { return "\(name)(a=\(a.f2),b=\(b.f2))" }

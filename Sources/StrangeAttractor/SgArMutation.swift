@@ -14,7 +14,7 @@ extension StrangeAttractor.Mutation {
         let util = SgArSearchUtil(count: count, iterations:iterations, threshold:threshold, concession:concession)
         let found = util.search(source: MutationSearchSource(base: driver, factor: CGFloat(factor)))
         if let outputFile = outputFile {
-            let json = found.map { $0.formula.json }
+            let json = found.map { $0.json }
             do {
                 let data = try JSONSerialization.data(withJSONObject: json, options: [ .prettyPrinted, .sortedKeys ])
                 let fileURL = URL(fileURLWithPath: outputFile)
