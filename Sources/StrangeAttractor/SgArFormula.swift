@@ -1,7 +1,6 @@
 import Foundation
 
 protocol SgArFormula: CustomStringConvertible {
-    var start: CGPoint { get }
     func next(x: CGFloat, y: CGFloat) -> CGPoint
     var name: String { get }
     var head: [String] { get }
@@ -17,7 +16,6 @@ extension SgAr {
     struct Bedhead: SgArFormula {
         let a: CGFloat
         let b: CGFloat
-        var start: CGPoint { return CGPoint(x: 1.0, y: 1.0) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = sin(x*y/b)*y+cos(a*x-y)
             let ynew  = x+sin(y)/b
@@ -33,7 +31,6 @@ extension SgAr {
         let b: CGFloat
         let c: CGFloat
         let d: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = sin(a*y)+c*cos(a*x)
             let ynew  = sin(b*x)+d*cos(b*y)
@@ -49,7 +46,6 @@ extension SgAr {
         let b: CGFloat
         let c: CGFloat
         let d: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = sin(y*b)+c*sin(x*b)
             let ynew  = sin(x*a)+d*sin(y*a)
@@ -99,7 +95,6 @@ extension SgAr {
               }
             self.f = f
         }
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint { return f(x, y) }
         var csv: [String] { return [name, "\(nf)", "\(ng)", "\(alpha)", "\(sigma)", "\(mu)"] }
         var head: [String] { return ["#name", "f", "g", "alpha", "sigma", "mu"] }
@@ -110,7 +105,6 @@ extension SgAr {
         let a: CGFloat
         let b: CGFloat
         let c: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.0, y: 0.0) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = y-1-sqrt(abs(b*x-1-c))*(x-1).sign
             let ynew  = a-x-1
@@ -126,7 +120,6 @@ extension SgAr {
         let b: CGFloat
         let c: CGFloat
         let d: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = cos(y*b) + c*sin(x*b)
             let ynew  = cos(x*a) + d*sin(y*a)
@@ -142,7 +135,6 @@ extension SgAr {
         let b: CGFloat
         let c: CGFloat
         let d: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = cos(y*b) + c*cos(x*b)
             let ynew  = cos(x*a) + d*cos(y*a)
@@ -158,7 +150,6 @@ extension SgAr {
         let b: CGFloat
         let c: CGFloat
         let d: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = sin(y*b) + c*cos(x*b)
             let ynew  = cos(x*a) + d*sin(y*a)
@@ -174,7 +165,6 @@ extension SgAr {
         let b: CGFloat
         let c: CGFloat
         let d: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = d*sin(x*a)-sin(y*b)
             let ynew  = c*cos(x*a)+cos(y*b)
@@ -190,7 +180,6 @@ extension SgAr {
         let b: CGFloat
         let c: CGFloat
         let d: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = sin(y*a)-cos(x*b)
             let ynew  = sin(x*c)-cos(y*d)
@@ -216,7 +205,6 @@ extension SgAr {
             ω = o
             self.d = d
         }
-        var start: CGPoint { return CGPoint(x: 0.01, y: 0.01) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             var zreal = x
             var zimag = y
@@ -244,7 +232,6 @@ extension SgAr {
         let d: CGFloat
         let x0: CGFloat
         let y0: CGFloat
-        var start: CGPoint { return CGPoint(x: x0, y: y0) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = x*x - y*y + a*x + b*y
             let ynew  = 2*x*y + c*x + d*y
@@ -262,7 +249,6 @@ extension SgAr {
             a = AYSystem.decode(s)
             assert(a.count == 12)
         }
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let x²  = x*x
             let y²  = y*y
@@ -283,7 +269,6 @@ extension SgAr {
             a = AYSystem.decode(s)
             assert(a.count == 20)
         }
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let x²  = x*x
             let y²  = y*y
@@ -306,7 +291,6 @@ extension SgAr {
             a = AYSystem.decode(s)
             assert(a.count == 30)
         }
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let x²  = x*x
             let y²  = y*y
@@ -329,7 +313,6 @@ extension SgAr {
         let b: CGFloat
         let c: CGFloat
         let d: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let A  = a * (x * x + y * y) + b * x * (x * x - 3 * y * y) + c
             let xnew  = A * x + d * (x * x - y * y)
@@ -344,7 +327,6 @@ extension SgAr {
     struct Lorenz: SgArFormula {
         let a: CGFloat
         let b: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew  = (1 + a * b) * x - b * x * y
             let ynew  = (1 - b) * y + b * x * x
@@ -358,7 +340,6 @@ extension SgAr {
     struct Cathala: SgArFormula {
         let a: CGFloat
         let b: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.5, y: 0.5) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew = a*x + y
             let ynew = b + x*x
@@ -372,7 +353,6 @@ extension SgAr {
     struct SprottElhadj: SgArFormula {
         let a: CGFloat
         let b: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.5, y: 0.5) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew = -a*x/(1 + y*y)
             let ynew = x + b*y
@@ -386,7 +366,6 @@ extension SgAr {
     struct ModifiedLozi: SgArFormula {
         let a: CGFloat
         let b: CGFloat
-        var start: CGPoint { return CGPoint(x: 0.5, y: 0.5) }
         func next(x: CGFloat, y: CGFloat) -> CGPoint {
             let xnew = 1 + a*(abs(x) - y*y) + y
             let ynew = b * x

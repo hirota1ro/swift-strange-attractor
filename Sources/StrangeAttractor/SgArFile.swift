@@ -102,6 +102,8 @@ extension SgArParam {
     func int(_ key: String) -> Int { return dict[key] as! Int }
     func flt(_ key: String) -> CGFloat { return dict[key] as! CGFloat }
     func str(_ key: String) -> String { return dict[key] as! String }
+
+    func getFloat(_ key: String) -> CGFloat? { return dict[key] as? CGFloat }
 }
 
 struct SgArDriver {
@@ -110,6 +112,13 @@ struct SgArDriver {
 }
 extension SgArDriver {
     var formula: SgArFormula { return factory.create(param: param) }
+    var start: CGPoint {
+        if let x0 = param.getFloat("x0"),
+           let y0 = param.getFloat("y0") {
+            return CGPoint(x: x0, y: y0)
+        }
+        return factory.start
+    }
     func createRandomly() -> SgArDriver {
         return SgArDriver(factory: factory, param: factory.createParamRandomly())
     }
