@@ -41,18 +41,24 @@ extension SgArDriver {
     var name: String { return factory.name }
 
     var json: [String: Any] {
-        var d: [String: Any] = ["name":name]
+        var d: [String: Any] = ["name": name]
         for arg in factory.args {
-            switch arg {
-            case let .i(key, _):
-                d[key] = param.int(key)
-            case let .f(key, _):
-                d[key] = param.flt(key)
-            case let .s(key, _):
-                d[key] = param.str(key)
-            }
+            let key = arg.key
+            d[key] = param.value(of: key)
         }
         return d
+    }
+
+    var head: [String] {
+        let keys = factory.args.map { $0.key }
+        return ["#name"] + keys
+    }
+
+    var csv: [String] {
+        let keys = factory.args.map { $0.key }
+        let values = keys.compactMap { param.value(of: $0) }
+        let record = values.map { "\($0)" }
+        return [name] + record
     }
 }
 

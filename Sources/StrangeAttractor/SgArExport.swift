@@ -19,13 +19,13 @@ extension StrangeAttractor.Export {
         for driver in drivers {
             let formula = driver.formula
             if formula.name != prev {
-                let hdr = formula.head + SgArVisual.head
+                let hdr = driver.head + SgArVisual.head
                 buf.append(hdr.joined(separator: ", "))
                 prev = formula.name
             }
             let vis = SgArVisual()
             try algorithm.draw(n: iterations, driver: driver, plotter: vis, progress: EmptyProgress())
-            let list: [String] = formula.csv + vis.csv
+            let list: [String] = driver.csv + vis.csv
             let line = list.joined(separator: ", ")
             buf.append(line)
         }

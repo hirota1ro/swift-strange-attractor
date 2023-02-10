@@ -57,10 +57,26 @@ enum SgArArgType {
     case s(String, Int)                  // AYsystem(key, count)
 }
 
+extension SgArArgType {
+
+    var key: String {
+        switch self {
+        case let .i(key, _):
+            return key
+        case let .f(key, _):
+            return key
+        case let .s(key, _):
+            return key
+        }
+    }
+}
+
 struct SgArParam {
     let dict: [String: Any]
 }
+
 extension SgArParam {
+
     static func build(args: [SgArArgType], dict: [String: Any]) throws -> SgArParam {
         var d: [String: Any] = [:]
         for arg in args {
@@ -104,4 +120,6 @@ extension SgArParam {
     func str(_ key: String) -> String { return dict[key] as! String }
 
     func getFloat(_ key: String) -> CGFloat? { return dict[key] as? CGFloat }
+
+    func value(of key: String) -> Any? { return dict[key] }
 }
