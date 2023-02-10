@@ -11,15 +11,10 @@ extension StrangeAttractor.Mutation {
             print("not contains formula in \(inputFile)")
             return
         }
-        let fmla = driver.formula
-        guard let base: SgArMutation = fmla as? SgArMutation else {
-            print("not confirm Mutation protocol \(fmla)")
-            return
-        }
         let util = SgArSearchUtil(count: count, iterations:iterations, threshold:threshold, concession:concession)
-        let found = util.search(source: MutationSearchSource(base: base, factor: CGFloat(factor)))
+        let found = util.search(source: MutationSearchSource(base: driver, factor: CGFloat(factor)))
         if let outputFile = outputFile {
-            let json = found.map { $0.json }
+            let json = found.map { $0.formula.json }
             do {
                 let data = try JSONSerialization.data(withJSONObject: json, options: [ .prettyPrinted, .sortedKeys ])
                 let fileURL = URL(fileURLWithPath: outputFile)
@@ -37,9 +32,9 @@ extension StrangeAttractor.Mutation {
 }
 
 struct MutationSearchSource {
-    let base: SgArMutation
+    let base: SgArDriver
     let factor: CGFloat
 }
 extension MutationSearchSource: SgArSearchSource {
-    func create() -> SgArFormula { return base.mutated(factor: factor) }
+    func create() -> SgArDriver { return base.mutated(factor: factor) }
 }

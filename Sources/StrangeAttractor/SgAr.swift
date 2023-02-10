@@ -5,7 +5,8 @@ struct SgAr {
 
 extension SgAr {
 
-    func draw(n: Int, formula: SgArFormula, plotter: SgArPlotter, progress: SgArProgress) throws {
+    func draw(n: Int, driver: SgArDriver, plotter: SgArPlotter, progress: SgArProgress) throws {
+        let formula = driver.formula
         var p = formula.start
         var v = CGPoint.zero
         var t = 0

@@ -24,7 +24,7 @@ extension StrangeAttractor.Export {
                 prev = formula.name
             }
             let vis = SgArVisual()
-            try algorithm.draw(n: iterations, formula: formula, plotter: vis, progress: EmptyProgress())
+            try algorithm.draw(n: iterations, driver: driver, plotter: vis, progress: EmptyProgress())
             let list: [String] = formula.csv + vis.csv
             let line = list.joined(separator: ", ")
             buf.append(line)

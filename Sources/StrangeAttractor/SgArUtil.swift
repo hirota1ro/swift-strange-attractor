@@ -32,7 +32,7 @@ struct BlackBackBrightnessResolver: SgArBrightnessResolver {
 }
 
 protocol SgArSearchSource {
-    func create() -> SgArFormula
+    func create() -> SgArDriver
 }
 
 struct SgArSearchUtil {
@@ -44,28 +44,28 @@ struct SgArSearchUtil {
 
 extension SgArSearchUtil {
 
-    func search(source: SgArSearchSource) -> [SgArFormula] {
+    func search(source: SgArSearchSource) -> [SgArDriver] {
         let progress = MeasurementProgress(DeterminableProgress())
         progress.begin()
         defer { progress.end() }
         let algorithm = SgAr()
         var threshold = self.threshold
         var failed: Int = 0
-        var found: [SgArFormula] = []
+        var found: [SgArDriver] = []
         while found.count < count {
-            let formula = source.create()
+            let driver = source.create()
             do {
                 let vis = SgArVisual()
-                try algorithm.draw(n: iterations, formula: formula, plotter: vis, progress: EmptyProgress())
+                try algorithm.draw(n: iterations, driver: driver, plotter: vis, progress: EmptyProgress())
                 if vis.divergent {
                     print("skip: divergent")
                     failed += 1
                 } else {
                     let paint = SgArPaintRatio(size: CGSize(width: 128, height: 128), vis: vis)
-                    try algorithm.draw(n: iterations, formula: formula, plotter: paint, progress: EmptyProgress())
+                    try algorithm.draw(n: iterations, driver: driver, plotter: paint, progress: EmptyProgress())
                     let ratio = paint.ratio
                     if ratio > threshold {
-                        found.append(formula)
+                        found.append(driver)
                         progress.progress(Float(found.count) / Float(count))
                         print("good: \(ratio) > \(threshold)")
                         failed = 0

@@ -8,7 +8,7 @@ struct SgArRenderer {
 }
 
 extension SgArRenderer {
-        func image(n: Int, algorithm: SgAr, formula: SgArFormula, progress: SgArProgress) -> NSImage {
+    func image(n: Int, algorithm: SgAr, driver: SgArDriver, progress: SgArProgress) -> NSImage {
         let image = NSImage(size: size)
         image.lockFocus()
 
@@ -17,7 +17,7 @@ extension SgArRenderer {
             CGRect(origin: .zero, size: size).fill()
         }
         do {
-            try algorithm.draw(n: n, formula: formula, plotter: self, progress: progress)
+            try algorithm.draw(n: n, driver: driver, plotter: self, progress: progress)
         } catch {
             print("\(error)")
         }

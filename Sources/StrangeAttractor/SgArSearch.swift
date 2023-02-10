@@ -3,14 +3,14 @@ import Foundation
 extension StrangeAttractor.Search {
 
     mutating func run() {
-        guard let generator = SgArRandom.obtain(name: name) else {
+        guard let factory = SgArFactories.obtain(name: name) else {
             print("failed: \(name)")
             return
         }
         let util = SgArSearchUtil(count: count, iterations:iterations, threshold:threshold, concession:concession)
-        let found = util.search(source: RandomSearchSource(generator: generator))
+        let found = util.search(source: RandomSearchSource(factory: factory))
         if let outputFile = outputFile {
-            let json = found.map { $0.json }
+            let json = found.map { $0.formula.json }
             do {
                 let data = try JSONSerialization.data(withJSONObject: json, options: [ .prettyPrinted, .sortedKeys ])
                 let fileURL = URL(fileURLWithPath: outputFile)
@@ -28,8 +28,8 @@ extension StrangeAttractor.Search {
 }
 
 struct RandomSearchSource {
-    let generator: SgArRandomFactory
+    let factory: SgArFactory
 }
 extension RandomSearchSource: SgArSearchSource {
-    func create() -> SgArFormula { return generator.randomCreate() }
+    func create() -> SgArDriver { return SgArDriver(factory: factory, param: factory.createParamRandomly()) }
 }

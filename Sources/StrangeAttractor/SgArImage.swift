@@ -10,26 +10,27 @@ extension StrangeAttractor.Image {
         let drivers = try SgArFile.read(from: inputFile)
         for driver in drivers {
             let formula = driver.formula
-            let image = try createImage(algorithm: algorithm, formula: formula)
+            let image = try createImage(algorithm: algorithm, driver: driver)
             try save(image: image, toFileName: "\(formula)")
         }
     }
 
-    func createImage(algorithm: SgAr, formula: SgArFormula) throws -> NSImage {
+    func createImage(algorithm: SgAr, driver: SgArDriver) throws -> NSImage {
+        let formula: SgArFormula = driver.formula
         let visual = SgArVisual()
-        try algorithm.draw(n: iterations, formula: formula, plotter: visual, progress: EmptyProgress())
+        try algorithm.draw(n: iterations, driver: driver, plotter: visual, progress: EmptyProgress())
         let renderer = renderer(visual: visual)
-        var image = renderImage(algorithm: algorithm, formula: formula, renderer: renderer)
+        var image = renderImage(algorithm: algorithm, driver: driver, renderer: renderer)
         if drawTitle {
             image = decorate(image: image, text: "\(formula)")
         }
         return image
     }
 
-    func renderImage(algorithm: SgAr, formula: SgArFormula, renderer: SgArRenderer) -> NSImage {
+    func renderImage(algorithm: SgAr, driver: SgArDriver, renderer: SgArRenderer) -> NSImage {
         let n = iterations * density * density
         let progress = MeasurementProgress(IndeterminableProgress())
-        let image = renderer.image(n: n, algorithm: algorithm, formula: formula, progress: progress)
+        let image = renderer.image(n: n, algorithm: algorithm, driver: driver, progress: progress)
         if density > 1 {
             let resizedImg = image.resized(to: sizeOfImage)
             if gamma != 1 {
