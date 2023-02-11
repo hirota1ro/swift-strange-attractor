@@ -7,8 +7,6 @@ struct SgArDriver {
 
 extension SgArDriver {
 
-    var formula: SgArFormula { return factory.create(param: param) }
-
     var next: SgArNext { return factory.next(param: param) }
 
     var start: CGPoint {
