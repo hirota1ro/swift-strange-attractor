@@ -49,6 +49,7 @@ enum SgArError: Error {
     case noFactory(String)
     case noParam(String)
     case missing(String, String)
+    case strCount(String)
 }
 
 enum SgArArgType {
@@ -85,8 +86,10 @@ extension SgArParam {
                 d[key] = try SgArParam.asInt(dict, key)
             case let .f(key, _):
                 d[key] = try SgArParam.asFloat(dict, key)
-            case let .s(key, _):
-                d[key] = try SgArParam.asStr(dict, key)
+            case let .s(key, count):
+                let s = try SgArParam.asStr(dict, key)
+                guard s.count == count else { throw SgArError.strCount(key) }
+                d[key] = s
             }
         }
         return SgArParam(dict: d)
