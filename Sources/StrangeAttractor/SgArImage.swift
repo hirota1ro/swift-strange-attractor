@@ -9,20 +9,18 @@ extension StrangeAttractor.Image {
         let algorithm = SgAr()
         let drivers = try SgArFile.read(from: inputFile)
         for driver in drivers {
-            let formula = driver.formula
             let image = try createImage(algorithm: algorithm, driver: driver)
-            try save(image: image, toFileName: "\(formula)")
+            try save(image: image, toFileName: "\(driver)")
         }
     }
 
     func createImage(algorithm: SgAr, driver: SgArDriver) throws -> NSImage {
-        let formula: SgArFormula = driver.formula
         let visual = SgArVisual()
         try algorithm.draw(n: iterations, driver: driver, plotter: visual, progress: EmptyProgress())
         let renderer = renderer(visual: visual)
         var image = renderImage(algorithm: algorithm, driver: driver, renderer: renderer)
         if drawTitle {
-            image = decorate(image: image, text: "\(formula)")
+            image = decorate(image: image, text: "\(driver)")
         }
         return image
     }

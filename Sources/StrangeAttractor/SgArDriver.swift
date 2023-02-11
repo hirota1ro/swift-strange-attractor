@@ -62,6 +62,28 @@ extension SgArDriver {
     }
 }
 
+extension SgArDriver: CustomStringConvertible {
+
+    var description: String {
+        var a: [String] = []
+        for arg in factory.args {
+            switch arg {
+            case let .i(key, _):
+                let ival = param.int(key)
+                a.append("\(key)=\(ival)")
+            case let .f(key, _):
+                let fval = param.flt(key)
+                a.append("\(key)=\(fval.f2)")
+            case let .s(key, _):
+                let sval = param.str(key)
+                a.append("\(key)=\(sval)")
+            }
+        }
+        let b = a.joined(separator: ",")
+        return "\(name)(\(b))"
+    }
+}
+
 extension SgArFactory {
 
     func createParamRandomly() -> SgArParam {
