@@ -9,6 +9,8 @@ extension SgArDriver {
 
     var formula: SgArFormula { return factory.create(param: param) }
 
+    var next: SgArNext { return factory.next(param: param) }
+
     var start: CGPoint {
         if let x0 = param.getFloat("x0"),
            let y0 = param.getFloat("y0") {

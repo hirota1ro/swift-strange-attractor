@@ -6,14 +6,14 @@ struct SgAr {
 extension SgAr {
 
     func draw(n: Int, driver: SgArDriver, plotter: SgArPlotter, progress: SgArProgress) throws {
-        let formula = driver.formula
+        let next = driver.next
         var p = driver.start
         var v = CGPoint.zero
         var t = 0
         progress.begin()
         defer { progress.end() }
         for i in 0 ..< n {
-            let q = formula.next(x: p.x, y: p.y)
+            let q = next(p.x, p.y)
             if q.isInvalid { throw SgArRuntimeError.math }
             let u = q - p
             if 20 < i {
