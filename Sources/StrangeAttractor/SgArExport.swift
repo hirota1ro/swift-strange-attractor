@@ -17,11 +17,10 @@ extension StrangeAttractor.Export {
         var buf: [String] = []
         var prev: String = ""
         for driver in drivers {
-            let formula = driver.formula
-            if formula.name != prev {
+            if driver.name != prev {
                 let hdr = driver.head + SgArVisual.head
                 buf.append(hdr.joined(separator: ", "))
-                prev = formula.name
+                prev = driver.name
             }
             let vis = SgArVisual()
             try algorithm.draw(n: iterations, driver: driver, plotter: vis, progress: EmptyProgress())
