@@ -106,7 +106,7 @@
   { "name": "SymmetricIcon", "l": 2.39, "a": -2.5, "b": -0.1, "g": 0.9, "o": -0.15, "d": 16 },
   { "name": "Tinkerbell", "a": 0.9, "b": -0.6013, "c": 2, "d": 0.5, "x0": -0.72, "y0": -0.64 },
   { "name": "Cathala", "a": 0.7, "b": -0.82, "x0": 0.5, "y0": 0.5 },
-  { "name": "SprottElhadj", "a": 2.9, "b": 0.8, "x0": 0.1, "y0": 0.1 },
-  { "name": "ModifiedLozi", "a": -1.8, "b": 0.3, "x0": 0.5, "y0": 0.5 },
-  { "name": "ModifiedLozi", "a": -1.8, "b": 0.53, "x0": 0.5, "y0": 0.5 }
+  { "name": "SprottElhadj", "a": 2.9, "b": 0.8 },
+  { "name": "ModifiedLozi", "a": -1.8, "b": 0.3 },
+  { "name": "ModifiedLozi", "a": -1.8, "b": 0.53 }
 ]
