@@ -9,13 +9,7 @@ extension SgArDriver {
 
     var next: SgArNext { return factory.next(param: param) }
 
-    var start: CGPoint {
-        if let x0 = param.getFloat("x0"),
-           let y0 = param.getFloat("y0") {
-            return CGPoint(x: x0, y: y0)
-        }
-        return factory.start
-    }
+    var start: CGPoint { return param.start ?? factory.start }
 
     func createRandomly() -> SgArDriver {
         return SgArDriver(factory: factory, param: factory.createParamRandomly())
@@ -62,6 +56,17 @@ extension SgArDriver {
     }
 }
 
+extension SgArParam {
+
+    var start: CGPoint? {
+        if let x0 = getFloat("x0"),
+           let y0 = getFloat("y0") {
+            return CGPoint(x: x0, y: y0)
+        }
+        return nil
+    }
+}
+
 extension SgArDriver: CustomStringConvertible {
 
     var description: String {
@@ -80,6 +85,10 @@ extension SgArDriver: CustomStringConvertible {
             }
         }
         let b = a.joined(separator: ",")
+
+        if let p = param.start {
+            return "\(name)(\(b))(x₀,y₀)=\(p)"
+        }
         return "\(name)(\(b))"
     }
 }

@@ -368,6 +368,21 @@ struct MultifoldHenon: SgArFactory {
     var start: CGPoint { return CGPoint(x: 1.0, y: 1.0) }
 }
 
+struct Mira: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        let f = { (_ x: CGFloat) -> CGFloat in return a*x+(2.0*(1.0-a)*x*x)/(1.0+x*x) }
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = b*y + f(x)
+            let ynew = -x + f(xnew)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 12.0, y: 0.0) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -403,5 +418,6 @@ class SgArFactories {
       SprottElhadj(),
       ModifiedLozi(),
       MultifoldHenon(),
+      Mira(),
     ]
 }
