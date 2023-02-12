@@ -354,6 +354,20 @@ struct ModifiedLozi: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.5, y: 0.5) }
 }
 
+struct MultifoldHenon: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = 1 - a*sin(x) + b*y
+            let ynew = x
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 1.0, y: 1.0) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -388,5 +402,6 @@ class SgArFactories {
       Cathala(),
       SprottElhadj(),
       ModifiedLozi(),
+      MultifoldHenon(),
     ]
 }

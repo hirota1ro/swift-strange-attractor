@@ -105,8 +105,9 @@
   { "name": "SymmetricIcon", "l": 1.455, "a": -1, "b": 0.03, "g": -0.8, "o": 0, "d": 3 },
   { "name": "SymmetricIcon", "l": 2.39, "a": -2.5, "b": -0.1, "g": 0.9, "o": -0.15, "d": 16 },
   { "name": "Tinkerbell", "a": 0.9, "b": -0.6013, "c": 2, "d": 0.5, "x0": -0.72, "y0": -0.64 },
-  { "name": "Cathala", "a": 0.7, "b": -0.82, "x0": 0.5, "y0": 0.5 },
+  { "name": "Cathala", "a": 0.7, "b": -0.82 },
   { "name": "SprottElhadj", "a": 2.9, "b": 0.8 },
   { "name": "ModifiedLozi", "a": -1.8, "b": 0.3 },
-  { "name": "ModifiedLozi", "a": -1.8, "b": 0.53 }
+  { "name": "ModifiedLozi", "a": -1.8, "b": 0.53 },
+  { "name": "MultifoldHenon", "a": 4.0, "b": 0.9 }
 ]
