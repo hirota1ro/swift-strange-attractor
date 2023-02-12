@@ -3,7 +3,7 @@ import Foundation
 extension StrangeAttractor.Search {
 
     mutating func run() {
-        guard let factory = SgArFactories.obtain(name: name) else {
+        guard let factory = SgArFactories.singleton.obtain(name: name) else {
             print("failed: \(name)")
             return
         }

@@ -355,29 +355,38 @@ struct ModifiedLozi: SgArFactory {
 }
 
 class SgArFactories {
+    let fmap: [String: SgArFactory]
 
-    static let fmap: [String: SgArFactory] = [
-      "Bedhead": Bedhead(),
-      "Clifford": Clifford(),
-      "FractalDream": FractalDream(),
-      "GumowskiMira": GumowskiMira(),
-      "Hopalong": Hopalong(),
-      "JasonRampe1": JasonRampe1(),
-      "JasonRampe2": JasonRampe2(),
-      "JasonRampe3": JasonRampe3(),
-      "JohnnySvensson": JohnnySvensson(),
-      "PeterDeJong": PeterDeJong(),
-      "SymmetricIcon": SymmetricIcon(),
-      "Tinkerbell": Tinkerbell(),
-      "QuadraticStrange": QuadraticStrange(),
-      "CubicStrange": CubicStrange(),
-      "QuarticStrange": QuarticStrange(),
-      "ChossatGolubitsky": ChossatGolubitsky(),
-      "Lorenz": Lorenz(),
-      "Cathala": Cathala(),
-      "SprottElhadj": SprottElhadj(),
-      "ModifiedLozi": ModifiedLozi()
+    init(factories: [SgArFactory]) {
+        self.fmap = factories.reduce([String: SgArFactory]()) { (d, f) in
+            return d.merging([f.name: f]) { (_, new) in new }
+        }        
+    }
+
+    func obtain(name: String) -> SgArFactory? { return fmap[name] }
+
+    static let singleton = SgArFactories(factories: SgArFactories.factories)
+
+    static let factories: [SgArFactory] = [
+      Bedhead(),
+      Clifford(),
+      FractalDream(),
+      GumowskiMira(),
+      Hopalong(),
+      JasonRampe1(),
+      JasonRampe2(),
+      JasonRampe3(),
+      JohnnySvensson(),
+      PeterDeJong(),
+      SymmetricIcon(),
+      Tinkerbell(),
+      QuadraticStrange(),
+      CubicStrange(),
+      QuarticStrange(),
+      ChossatGolubitsky(),
+      Lorenz(),
+      Cathala(),
+      SprottElhadj(),
+      ModifiedLozi(),
     ]
-
-    static func obtain(name: String) -> SgArFactory? { return fmap[name] }
 }

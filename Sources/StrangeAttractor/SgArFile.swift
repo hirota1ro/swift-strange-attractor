@@ -24,7 +24,7 @@ extension SgArFile {
         guard let name = dict["name"] as? String else {
             throw SgArError.noName
         }
-        guard let factory = SgArFactories.obtain(name: "\(name)") else {
+        guard let factory = SgArFactories.singleton.obtain(name: "\(name)") else {
             throw SgArError.noFactory(name)
         }
         do {
