@@ -48,7 +48,7 @@ extension SgArSearchUtil {
         let progress = MeasurementProgress(DeterminableProgress())
         progress.begin()
         defer { progress.end() }
-        let algorithm = SgAr()
+        let algorithm = SgArAlgorithm()
         var threshold = self.threshold
         var failed: Int = 0
         var found: [SgArDriver] = []

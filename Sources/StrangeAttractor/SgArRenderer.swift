@@ -8,7 +8,7 @@ struct SgArRenderer {
 }
 
 extension SgArRenderer {
-    func image(n: Int, algorithm: SgAr, driver: SgArDriver, progress: SgArProgress) -> NSImage {
+    func image(n: Int, algorithm: SgArAlgorithm, driver: SgArDriver, progress: SgArProgress) -> NSImage {
         let image = NSImage(size: size)
         image.lockFocus()
 

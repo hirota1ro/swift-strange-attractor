@@ -1,9 +1,6 @@
 import Foundation
 
-struct SgAr {
-}
-
-extension SgAr {
+struct SgArAlgorithm {
 
     func draw(n: Int, driver: SgArDriver, plotter: SgArPlotter, progress: SgArProgress) throws {
         let next = driver.next

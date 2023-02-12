@@ -13,7 +13,7 @@ extension StrangeAttractor.Export {
     }
 
     func createText(drivers: [SgArDriver]) throws -> String {
-        let algorithm = SgAr()
+        let algorithm = SgArAlgorithm()
         var buf: [String] = []
         var prev: String = ""
         for driver in drivers {

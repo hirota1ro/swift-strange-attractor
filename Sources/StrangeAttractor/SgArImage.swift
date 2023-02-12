@@ -6,7 +6,7 @@ extension StrangeAttractor.Image {
     var sizeOfImage: CGSize { return CGSize(width: width, height: height ?? width) }
 
     mutating func run() throws {
-        let algorithm = SgAr()
+        let algorithm = SgArAlgorithm()
         let drivers = try SgArFile.read(from: inputFile)
         for driver in drivers {
             let image = try createImage(algorithm: algorithm, driver: driver)
@@ -14,7 +14,7 @@ extension StrangeAttractor.Image {
         }
     }
 
-    func createImage(algorithm: SgAr, driver: SgArDriver) throws -> NSImage {
+    func createImage(algorithm: SgArAlgorithm, driver: SgArDriver) throws -> NSImage {
         let visual = SgArVisual()
         try algorithm.draw(n: iterations, driver: driver, plotter: visual, progress: EmptyProgress())
         let renderer = renderer(visual: visual)
@@ -25,7 +25,7 @@ extension StrangeAttractor.Image {
         return image
     }
 
-    func renderImage(algorithm: SgAr, driver: SgArDriver, renderer: SgArRenderer) -> NSImage {
+    func renderImage(algorithm: SgArAlgorithm, driver: SgArDriver, renderer: SgArRenderer) -> NSImage {
         let n = iterations * density * density
         let progress = MeasurementProgress(IndeterminableProgress())
         let image = renderer.image(n: n, algorithm: algorithm, driver: driver, progress: progress)
