@@ -455,6 +455,19 @@ struct StrelkovaAnishchenko: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 1.0) }
 }
 
+struct Arnold: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -4...4)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = (x + y + a*cos(2*CGFloat.pi*y)).remainder(dividingBy: 1)
+            let ynew = (x + 2*y).remainder(dividingBy: 1)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -496,5 +509,6 @@ class SgArFactories {
       Popcorn(),
       Ushiki(),
       StrelkovaAnishchenko(),
+      Arnold(),
     ]
 }
