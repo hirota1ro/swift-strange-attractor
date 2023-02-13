@@ -92,6 +92,11 @@ extension SgArParam {
                 d[key] = s
             }
         }
+        if let x0 = try? SgArParam.asFloat(dict, "x0"),
+           let y0 = try? SgArParam.asFloat(dict, "y0") {
+            d["x0"] = x0
+            d["y0"] = y0
+        }
         return SgArParam(dict: d)
     }
     static func asInt(_ dict: [String: Any], _ key: String) throws -> Int {

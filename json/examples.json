@@ -109,5 +109,10 @@
   { "name": "SprottElhadj", "a": 2.9, "b": 0.8 },
   { "name": "ModifiedLozi", "a": -1.8, "b": 0.3 },
   { "name": "ModifiedLozi", "a": -1.8, "b": 0.53 },
-  { "name": "MultifoldHenon", "a": 4.0, "b": 0.9 }
+  { "name": "MultifoldHenon", "a": 4.0, "b": 0.9 },
+  { "name": "Mira", "a": 0.2, "b": 1 },
+  { "name": "Mira", "a": 0.3, "b": 1, "x0": 5, "y0": 0 },
+  { "name": "Mira", "a": 0.31, "b": 1 },
+  { "name": "Mira", "a": 0.32, "b": 1, "x0": 5, "y0": 3 },
+  { "name": "Mira", "a": 0.36, "b": 1, "x0": 11, "y0": 0 }
 ]
