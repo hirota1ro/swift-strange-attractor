@@ -398,6 +398,19 @@ struct Mira: SgArFactory {
     var start: CGPoint { return CGPoint(x: 12.0, y: 0.0) }
 }
 
+struct Martin: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -4...4)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = y - sin(x)
+            let ynew = a - x
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.5) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -435,5 +448,6 @@ class SgArFactories {
       ModifiedLozi(),
       MultifoldHenon(),
       Mira(),
+      Martin(),
     ]
 }
