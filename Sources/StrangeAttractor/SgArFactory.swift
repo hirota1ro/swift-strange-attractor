@@ -468,6 +468,18 @@ struct Arnold: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct Cat: SgArFactory {
+    var args: [SgArArgType] { return [] }
+    func next(param: SgArParam) -> SgArNext {
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = (2*x + y).remainder(dividingBy: 1)
+            let ynew = (x + y).remainder(dividingBy: 1)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -510,5 +522,6 @@ class SgArFactories {
       Ushiki(),
       StrelkovaAnishchenko(),
       Arnold(),
+      Cat(),
     ]
 }
