@@ -106,6 +106,21 @@ struct Hopalong: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.0, y: 0.0) }
 }
 
+struct Hopalong2: SgArFactory {
+    var args: [SgArArgType] { return [.f("a",0...10), .f("b",0...10), .f("c",0...10)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        let c = param.flt("c")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = y - x.sign*sqrt(abs(b*x - c))
+            let ynew = a - x
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.5, y: 0.5) }
+}
+
 struct JasonRampe1: SgArFactory {
     var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-3...3), .f("d",-3...3)] }
     func next(param: SgArParam) -> SgArNext {
@@ -402,6 +417,7 @@ class SgArFactories {
       FractalDream(),
       GumowskiMira(),
       Hopalong(),
+      Hopalong2(),
       JasonRampe1(),
       JasonRampe2(),
       JasonRampe3(),
