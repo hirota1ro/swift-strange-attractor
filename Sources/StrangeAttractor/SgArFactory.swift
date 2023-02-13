@@ -480,6 +480,35 @@ struct Cat: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct HeagyHammel: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -4...4), .f("s", -4...4), .f("b", -4...4)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let s = param.flt("s")
+        let b = param.flt("b")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = a*(1 - s*cos(2*CGFloat.pi*y))*x*(1 - x)
+            let ynew = (y + b).remainder(dividingBy: 1)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
+struct HyperChaotic: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -4...4), .f("c", -4...4)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let c = param.flt("c")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = 1 - a*x*x + c*(y*y - x*x)
+            let ynew = 1 - a*y*y + c*(x*x - y*y)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 1.0, y: 0.5) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -523,5 +552,7 @@ class SgArFactories {
       StrelkovaAnishchenko(),
       Arnold(),
       Cat(),
+      HeagyHammel(),
+      HyperChaotic(),
     ]
 }

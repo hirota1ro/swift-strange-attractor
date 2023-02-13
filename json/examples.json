@@ -122,5 +122,6 @@
   { "name": "Ushiki", "a": 3.7, "b": 0.1, "c": 3.7, "d": 0.15 },
   { "name": "StrelkovaAnishchenko", "a": 0.9, "b": 0.285 },
   { "name": "Arnold", "a": 0.15 },
-  { "name": "Cat" }
+  { "name": "Cat" },
+  { "name": "HyperChaotic", "a": 1.84, "c": -0.35 }
 ]
