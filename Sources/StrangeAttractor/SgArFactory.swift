@@ -620,6 +620,20 @@ struct Gingerbread: SgArFactory {
     var start: CGPoint { return CGPoint(x: 4.0, y: -2.10) }
 }
 
+struct MacMillan: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = y
+            let ynew = -x + 2*a*(y/(1 + y*y)) + b*y
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -673,5 +687,6 @@ class SgArFactories {
       CubicHenon(),
       MaynardSmith(),
       Gingerbread(),
+      MacMillan(),
     ]
 }
