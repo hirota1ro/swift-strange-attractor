@@ -606,6 +606,20 @@ struct MaynardSmith: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct Gingerbread: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = 1 - a*abs(x) + b*y
+            let ynew = x
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 4.0, y: -2.10) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -658,5 +672,6 @@ class SgArFactories {
       KhovanovLuchinsky(),
       CubicHenon(),
       MaynardSmith(),
+      Gingerbread(),
     ]
 }
