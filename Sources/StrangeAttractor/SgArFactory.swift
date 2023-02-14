@@ -564,6 +564,21 @@ struct WuYang: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.8909, y: 0.3342) }
 }
 
+struct KhovanovLuchinsky: SgArFactory {
+    var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-3...3)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        let c = param.flt("c")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = y
+            let ynew = -a*x + b*y - y*y*y + c
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -613,5 +628,6 @@ class SgArFactories {
       JoshiBlackmore(),
       LimitCycle(),
       WuYang(),
+      KhovanovLuchinsky(),
     ]
 }

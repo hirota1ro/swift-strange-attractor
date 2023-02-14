@@ -127,5 +127,6 @@
   { "name": "CoupledLogisticMap", "a": 0.012, "b": 3.7 },
   { "name": "JoshiBlackmore", "a": 4.02, "b": 1.618 },
   { "name": "LimitCycle" },
-  { "name": "WuYang", "r": 1.18 }
+  { "name": "WuYang", "r": 1.18 },
+  { "name": "KhovanovLuchinsky", "a": 0.15, "b": 2.7, "c": 0.0 }
 ]
