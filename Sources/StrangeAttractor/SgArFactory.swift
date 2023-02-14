@@ -509,13 +509,27 @@ struct HyperChaotic: SgArFactory {
     var start: CGPoint { return CGPoint(x: 1.0, y: 0.5) }
 }
 
+struct CoupledLogisticMap: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -4...4), .f("b", -4...4)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = (1 - a)*b*(1 - x)*x + a*b*(1 - y)*y
+            let ynew = (1 - a)*b*(1 - y)*y + a*b*(1 - x)*x
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.3, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
     init(factories: [SgArFactory]) {
         self.fmap = factories.reduce([String: SgArFactory]()) { (d, f) in
             return d.merging([f.name: f]) { (_, new) in new }
-        }        
+        }
     }
 
     func obtain(name: String) -> SgArFactory? { return fmap[name] }
@@ -554,5 +568,6 @@ class SgArFactories {
       Cat(),
       HeagyHammel(),
       HyperChaotic(),
+      CoupledLogisticMap(),
     ]
 }
