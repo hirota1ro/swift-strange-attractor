@@ -126,5 +126,6 @@
   { "name": "HyperChaotic", "a": 1.84, "c": -0.35 },
   { "name": "CoupledLogisticMap", "a": 0.012, "b": 3.7 },
   { "name": "JoshiBlackmore", "a": 4.02, "b": 1.618 },
-  { "name": "LimitCycle" }
+  { "name": "LimitCycle" },
+  { "name": "WuYang", "r": 1.18 }
 ]

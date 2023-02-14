@@ -551,6 +551,19 @@ struct LimitCycle: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.001, y: 0.001) }
 }
 
+struct WuYang: SgArFactory {
+    var args: [SgArArgType] { return [.f("r", -4...4)] }
+    func next(param: SgArParam) -> SgArNext {
+        let r = param.flt("r")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = r*(3*y    + 1)*x*(1 - x)
+            let ynew = r*(3*xnew + 1)*y*(1 - y)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.8909, y: 0.3342) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -599,5 +612,6 @@ class SgArFactories {
       CoupledLogisticMap(),
       JoshiBlackmore(),
       LimitCycle(),
+      WuYang(),
     ]
 }
