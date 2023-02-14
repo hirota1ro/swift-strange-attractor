@@ -523,6 +523,22 @@ struct CoupledLogisticMap: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.3, y: 0.1) }
 }
 
+struct JoshiBlackmore: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -4...4), .f("b", -4...4)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        let cos2πb = cos(2.0*CGFloat.pi*b)
+        let sin2πb = sin(2.0*CGFloat.pi*b)
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = a*exp(-x*x - y*y)*(x*cos2πb - y*sin2πb)
+            let ynew = a*exp(-x*x - y*y)*(x*sin2πb + y*cos2πb)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -569,5 +585,6 @@ class SgArFactories {
       HeagyHammel(),
       HyperChaotic(),
       CoupledLogisticMap(),
+      JoshiBlackmore(),
     ]
 }

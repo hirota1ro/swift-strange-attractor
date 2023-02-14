@@ -124,5 +124,6 @@
   { "name": "Arnold", "a": 0.15 },
   { "name": "Cat" },
   { "name": "HyperChaotic", "a": 1.84, "c": -0.35 },
-  { "name": "CoupledLogisticMap", "a": 0.012, "b": 3.7 }
+  { "name": "CoupledLogisticMap", "a": 0.012, "b": 3.7 },
+  { "name": "JoshiBlackmore", "a": 4.02, "b": 1.618 }
 ]
