@@ -129,5 +129,6 @@
   { "name": "LimitCycle" },
   { "name": "WuYang", "r": 1.18 },
   { "name": "KhovanovLuchinsky", "a": 0.15, "b": 2.7, "c": 0.0 },
-  { "name": "CubicHenon", "a": 1.5 }
+  { "name": "CubicHenon", "a": 1.5 },
+  { "name": "MaynardSmith", "a": 0.67, "b": 0.75 }
 ]

@@ -592,6 +592,20 @@ struct KhovanovLuchinsky: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct MaynardSmith: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = y
+            let ynew = a*y + b - x*x
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -643,5 +657,6 @@ class SgArFactories {
       WuYang(),
       KhovanovLuchinsky(),
       CubicHenon(),
+      MaynardSmith(),
     ]
 }
