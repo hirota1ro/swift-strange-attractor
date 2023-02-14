@@ -133,5 +133,6 @@
   { "name": "MaynardSmith", "a": 0.67, "b": 0.75 },
   { "name": "Gingerbread", "a": -1, "b": -1 },
   { "name": "MacMillan", "a": 1.6, "b": 0.4 },
-  { "name": "ModifiedMira", "a": 0.04, "b": 1 }
+  { "name": "ModifiedMira", "a": 0.04, "b": 1 },
+  { "name": "ElhadjSprottA", "a": 1.6, "b": -0.2 }
 ]
