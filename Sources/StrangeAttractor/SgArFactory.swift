@@ -539,6 +539,18 @@ struct JoshiBlackmore: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct LimitCycle: SgArFactory {
+    var args: [SgArArgType] { return [] }
+    func next(param: SgArParam) -> SgArNext {
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = -y + x*(1 - x*x - y*y)
+            let ynew = x + y*(1 - x*x - y*y)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.001, y: 0.001) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -586,5 +598,6 @@ class SgArFactories {
       HyperChaotic(),
       CoupledLogisticMap(),
       JoshiBlackmore(),
+      LimitCycle(),
     ]
 }
