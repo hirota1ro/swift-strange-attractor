@@ -777,6 +777,23 @@ struct Ikeda: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct Belykh: SgArFactory {
+    var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("k",-3...3)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        let k = param.flt("k")
+        let L = { (_ x: CGFloat, _ y: CGFloat) -> CGFloat in return k*(2*x - 1) + 2*y - 1 }
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let c = L(x, y)
+            let xnew = c <= 0 ? a*x : a*(x - 1) + 1
+            let ynew = c <= 0 ? b*y : b*(y - 1) + 1
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -841,5 +858,6 @@ class SgArFactories {
       CrossChaotic(),
       ProvenzaleBalmforth(),
       Ikeda(),
+      Belykh(),
     ]
 }
