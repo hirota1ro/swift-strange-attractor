@@ -140,5 +140,6 @@
   { "name": "BusinessCycle", "a": 1.00, "b": 0.85 },
   { "name": "BusinessCycle", "a": 1.46, "b": 0.6 },
   { "name": "DualHenon", "a": 2.0, "b": 0.3, "c": 0.1 },
-  { "name": "SineSine", "a": 2.0 }
+  { "name": "SineSine", "a": 2.0 },
+  { "name": "Serpentine", "a": 1.9 }
 ]

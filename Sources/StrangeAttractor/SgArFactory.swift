@@ -719,6 +719,21 @@ struct SineSine: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct Serpentine: SgArFactory {
+    var args: [SgArArgType] { return [.f("a",-3...3)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = atan(cot(pow(2,a)*x))
+            let ynew = sin(pow(2,a)*y)*cos(pow(2,a)*y)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
+@inlinable func cot(_ x: CGFloat) -> CGFloat { return 1 / tan(x) }
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -779,5 +794,6 @@ class SgArFactories {
       BusinessCycle(),
       DualHenon(),
       SineSine(),
+      Serpentine(),
     ]
 }
