@@ -748,6 +748,20 @@ struct CrossChaotic: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct ProvenzaleBalmforth: SgArFactory {
+    var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = (a*y + b)*x*(1 - x)
+            let ynew = 4*y*(1 - y)
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -810,5 +824,6 @@ class SgArFactories {
       SineSine(),
       Serpentine(),
       CrossChaotic(),
+      ProvenzaleBalmforth(),
     ]
 }
