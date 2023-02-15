@@ -143,5 +143,7 @@
   { "name": "SineSine", "a": 2.0 },
   { "name": "Serpentine", "a": 1.9 },
   { "name": "CrossChaotic", "a": 0.8, "b": 2.834 },
-  { "name": "ProvenzaleBalmforth", "a": 3.95, "b": 0.05 }
+  { "name": "ProvenzaleBalmforth", "a": 3.95, "b": 0.05 },
+  { "name": "Ikeda", "c": 0.4, "u": 0.9 },
+  { "name": "Ikeda", "c": 0.0, "u": 0.97 }
 ]
