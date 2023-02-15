@@ -734,6 +734,20 @@ struct Serpentine: SgArFactory {
 
 @inlinable func cot(_ x: CGFloat) -> CGFloat { return 1 / tan(x) }
 
+struct CrossChaotic: SgArFactory {
+    var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = 1 - a*y*y
+            let ynew = cos(b*acos(x))
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -795,5 +809,6 @@ class SgArFactories {
       DualHenon(),
       SineSine(),
       Serpentine(),
+      CrossChaotic(),
     ]
 }
