@@ -134,5 +134,8 @@
   { "name": "Gingerbread", "a": -1, "b": -1 },
   { "name": "MacMillan", "a": 1.6, "b": 0.4 },
   { "name": "ModifiedMira", "a": 0.04, "b": 1 },
-  { "name": "ElhadjSprottA", "a": 1.6, "b": -0.2 }
+  { "name": "ElhadjSprottA", "a": 1.6, "b": -0.2 },
+  { "name": "BusinessCycle", "a": 0.09, "b": 1.59 },
+  { "name": "BusinessCycle", "a": 1.00, "b": 0.85 },
+  { "name": "BusinessCycle", "a": 1.46, "b": 0.6 }
 ]

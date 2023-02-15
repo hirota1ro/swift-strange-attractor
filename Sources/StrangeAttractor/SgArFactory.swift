@@ -663,6 +663,20 @@ struct ElhadjSprottA: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct BusinessCycle: SgArFactory {
+    var args: [SgArArgType] { return [.f("a", -4...4), .f("b", -4...4)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = x + y
+            let ynew = a*y - (a + 1)*y*y*y - b*x
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -719,5 +733,6 @@ class SgArFactories {
       MacMillan(),
       ModifiedMira(),
       ElhadjSprottA(),
+      BusinessCycle(),
     ]
 }
