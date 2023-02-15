@@ -794,6 +794,21 @@ struct Belykh: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct Belykh1: SgArFactory {
+    var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        let b = param.flt("b")
+        let S = { (_ x: CGFloat) -> CGFloat in return x < 0 ? -1 : 1 }
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = S(x) - a*x + b*y
+            let ynew = x
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -859,5 +874,6 @@ class SgArFactories {
       ProvenzaleBalmforth(),
       Ikeda(),
       Belykh(),
+      Belykh1(),
     ]
 }
