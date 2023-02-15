@@ -706,6 +706,19 @@ struct DualHenon: SgArFactory {
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
 }
 
+struct SineSine: SgArFactory {
+    var args: [SgArArgType] { return [.f("a",-3...3)] }
+    func next(param: SgArParam) -> SgArNext {
+        let a = param.flt("a")
+        return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
+            let xnew = sin(x) - sin(a*y)
+            let ynew = x
+            return CGPoint(x: xnew, y: ynew)
+        }
+    }
+    var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }
+}
+
 class SgArFactories {
     let fmap: [String: SgArFactory]
 
@@ -765,5 +778,6 @@ class SgArFactories {
       ElhadjSprottC(),
       BusinessCycle(),
       DualHenon(),
+      SineSine(),
     ]
 }
