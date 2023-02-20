@@ -342,7 +342,7 @@ struct Cathala: SgArFactory {
 }
 
 struct SprottElhadj: SgArFactory {
-    var args: [SgArArgType] { return [.f("a", -1...1), .f("b", -1...1)] }
+    var args: [SgArArgType] { return [.f("a", -4...4), .f("b", -2...2)] }
     func next(param: SgArParam) -> SgArNext {
         let a = param.flt("a")
         let b = param.flt("b")
