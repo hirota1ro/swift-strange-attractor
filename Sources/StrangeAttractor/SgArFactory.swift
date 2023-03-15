@@ -426,7 +426,7 @@ struct Popcorn: SgArFactory {
 }
 
 struct Ushiki: SgArFactory {
-    var args: [SgArArgType] { return [.f("a",-3...3), .f("b",-3...3), .f("c",-3...3), .f("d",-3...3)] }
+    var args: [SgArArgType] { return [.f("a",-4...4), .f("b",-3...3), .f("c",-4...4), .f("d",-3...3)] }
     func next(param: SgArParam) -> SgArNext {
         let a = param.flt("a")
         let b = param.flt("b")
