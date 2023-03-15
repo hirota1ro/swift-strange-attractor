@@ -45,3 +45,8 @@ mutation search and save to file
 ```
 StrangeAttractor mutation ~/tmp/base.json -o ~/tmp/mutation.json
 ```
+
+list of attractor-names (for random search)
+```
+StrangeAttractor list
+```

@@ -5,7 +5,7 @@ import ArgumentParser
 struct StrangeAttractor: ParsableCommand {
     static var configuration = CommandConfiguration(
       abstract: "Utilities for Strange Attractors.",
-      subcommands: [Image.self, Search.self, Mutation.self, Export.self],
+      subcommands: [Image.self, Search.self, Mutation.self, Export.self, List.self],
       defaultSubcommand: Image.self,
       helpNames: [.long, .customShort("?")])
 }
@@ -113,6 +113,16 @@ extension StrangeAttractor {
 
         @Option(name: [.customShort("N"), .long], help: "The number of iterations")
         var iterations: Int = 10_000
+
+        @Option(name: .shortAndLong, help: "output file path")
+        var outputFile: String?
+    }
+}
+
+extension StrangeAttractor {
+    struct List: ParsableCommand {
+        static var configuration
+          = CommandConfiguration(abstract: "output list of attractor-names.")
 
         @Option(name: .shortAndLong, help: "output file path")
         var outputFile: String?
