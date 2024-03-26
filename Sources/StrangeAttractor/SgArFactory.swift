@@ -66,26 +66,27 @@ struct GumowskiMira: SgArFactory {
         let a = param.flt("a")
         let s = param.flt("s")
         let m = param.flt("m")
-        let g: (CGFloat) -> CGFloat = (ng == 1)
-          ? { (_ x: CGFloat) -> CGFloat in
-              let x² = x*x
-              return m * x + (2 * (1 - m) * x²) / (1 + x²)
-          }
-          : { (_ x: CGFloat) -> CGFloat in
-              let x² = x*x
-              return m * x + (1 - m) * x² * exp((1 - x²) / 4)
-          }
-        let f: SgArNext = (nf == 1)
-          ? { (_ x:CGFloat, _ y:CGFloat) -> CGPoint in
-              let xnew =  y + g(x)
-              let ynew = -x + g(xnew)
-              return CGPoint(x: xnew, y: ynew)
-          }
-          : { (_ x:CGFloat, _ y:CGFloat) -> CGPoint in
-              let xnew =  y + a * y * (1 - s * y*y) + g(x)
-              let ynew = -x + g(xnew)
-              return CGPoint(x: xnew, y: ynew)
-          }
+        typealias GFunc = (CGFloat) -> CGFloat
+        let g1: GFunc = { (_ x: CGFloat) -> CGFloat in
+            let x² = x*x
+            return m * x + (2 * (1 - m) * x²) / (1 + x²)
+        }
+        let g2: GFunc = { (_ x: CGFloat) -> CGFloat in
+            let x² = x*x
+            return m * x + (1 - m) * x² * CGFloat(exp((1 - x²) / CGFloat(4)))
+        }
+        let g: GFunc = (ng == 1) ? g1 : g2
+        let f1: SgArNext = { (_ x:CGFloat, _ y:CGFloat) -> CGPoint in
+            let xnew =  y + g(x)
+            let ynew = -x + g(xnew)
+            return CGPoint(x: xnew, y: ynew)
+        }
+        let f2: SgArNext = { (_ x:CGFloat, _ y:CGFloat) -> CGPoint in
+            let xnew =  y + a * y * (1 - s * y*y) + g(x)
+            let ynew = -x + g(xnew)
+            return CGPoint(x: xnew, y: ynew)
+        }
+        let f: SgArNext = (nf == 1) ? f1 : f2
         return f
     }
     var start: CGPoint { return CGPoint(x: 0.1, y: 0.1) }

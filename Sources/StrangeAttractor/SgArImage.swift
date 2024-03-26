@@ -9,8 +9,12 @@ extension StrangeAttractor.Image {
         let algorithm = SgArAlgorithm()
         let drivers = try SgArFile.read(from: inputFile)
         for driver in drivers {
-            let image = try createImage(algorithm: algorithm, driver: driver)
-            try save(image: image, toFileName: "\(driver)")
+            do {
+                let image = try createImage(algorithm: algorithm, driver: driver)
+                try save(image: image, toFileName: "\(driver)")
+            } catch SgArRuntimeError.math {
+                print("ignore: math error")
+            }
         }
     }
 
