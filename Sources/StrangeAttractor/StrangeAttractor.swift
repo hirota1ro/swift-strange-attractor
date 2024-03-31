@@ -27,6 +27,9 @@ extension StrangeAttractor {
         @Option(name: [.customShort("N"), .long], help: "The number of iterations")
         var iterations: Int = 100_000
 
+        @Option(name: .long, help: "The number of iterations for visual")
+        var visualIterations: Int = 100_000
+
         @Option(name: .shortAndLong, help: "The number of high density")
         var density: Int = 1
 

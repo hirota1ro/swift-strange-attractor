@@ -20,7 +20,7 @@ extension StrangeAttractor.Image {
 
     func createImage(algorithm: SgArAlgorithm, driver: SgArDriver) throws -> NSImage {
         let visual = SgArVisual()
-        try algorithm.draw(n: iterations, driver: driver, plotter: visual, progress: EmptyProgress())
+        try algorithm.draw(n: visualIterations, driver: driver, plotter: visual, progress: EmptyProgress())
         let renderer = renderer(visual: visual)
         var image = renderImage(algorithm: algorithm, driver: driver, renderer: renderer)
         if drawTitle {
