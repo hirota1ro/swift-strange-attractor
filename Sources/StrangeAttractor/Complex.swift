@@ -6,6 +6,12 @@ struct Complex {
 }
 
 extension Complex {
+    init(angle: CGFloat, radius: CGFloat=1) {
+        self.init(re: radius * cos(angle), im: radius * sin(angle))
+    }
+}
+
+extension Complex {
 
     func plus(_ z: Complex) -> Complex { return Complex(re: re + z.re, im: im + z.im) }
 
@@ -19,7 +25,7 @@ extension Complex {
      * @param z complex number to divide
      * @return self / z
      */
-    func div(z: Complex) -> Complex {
+    func div(_ z: Complex) -> Complex {
         // (c + di)     (ac + bd) + (ad - bc)i
         // ---------- = ----------------------
         // (a + bi)           a^2 + b^2
