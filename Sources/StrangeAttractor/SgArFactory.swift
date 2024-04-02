@@ -212,18 +212,11 @@ struct SymmetricIcon: SgArFactory {
         let ω = param.flt("o")
         let d = param.int("d")
         return { (_ x: CGFloat, _ y: CGFloat) -> CGPoint in
-            var zreal = x
-            var zimag = y
-            for _ in 0 ..< d-2 {
-                let za = zreal*x - zimag*y
-                let zb = zimag*x + zreal*y
-                zreal = za
-                zimag = zb
-            }
-            let zn = x*zreal - y*zimag
+            let z = Complex(re: x, im: y).pow(d - 1)
+            let zn = x*z.re - y*z.im
             let p = α*(x*x + y*y) + β*zn + λ
-            let xnew = p*x + γ*zreal - ω*y
-            let ynew = p*y - γ*zimag + ω*x
+            let xnew = p*x + γ*z.re - ω*y
+            let ynew = p*y - γ*z.im + ω*x
             return CGPoint(x: xnew, y: ynew)
         }
     }
