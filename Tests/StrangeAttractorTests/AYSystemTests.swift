@@ -56,4 +56,12 @@ class AYSystemTests: XCTestCase {
         XCTAssertEqual(AYSystem.encodeChar(1.1), "X")
         XCTAssertEqual(AYSystem.encodeChar(1.2), "Y")
     }
+
+    func testCVQKGHQTPHTE() throws {
+        let a: [CGFloat] = AYSystem.decode("CVQKGHQTPHTE")
+        let b: [CGFloat] = [-1.0, 0.9, 0.4, -0.2, -0.6, -0.5, 0.4, 0.7, 0.3, -0.5, 0.7, -0.8]
+        zip(a, b).forEach { (l, r) in
+            XCTAssertEqual(l, r, accuracy: 1e-5)
+        }
+    }
 }
