@@ -9,20 +9,19 @@ struct SgArRenderer {
 
 extension SgArRenderer {
     func image(n: Int, algorithm: SgArAlgorithm, driver: SgArDriver, progress: SgArProgress) -> NSImage {
-        let image = NSImage(size: size)
-        image.lockFocus()
-
-        if let bgColor = backgroundColor {
-            bgColor.setFill()
-            CGRect(origin: .zero, size: size).fill()
+        let bm = Bitmap(size: size)
+        let cgImg = bm.image { _ in
+            if let bgColor = backgroundColor {
+                bgColor.setFill()
+                CGRect(origin: .zero, size: size).fill()
+            }
+            do {
+                try algorithm.draw(n: n, driver: driver, plotter: self, progress: progress)
+            } catch {
+                print("\(error)")
+            }
         }
-        do {
-            try algorithm.draw(n: n, driver: driver, plotter: self, progress: progress)
-        } catch {
-            print("\(error)")
-        }
-        image.unlockFocus()
-        return image
+        return NSImage(cgImage: cgImg, size: size)
     }
 }
 

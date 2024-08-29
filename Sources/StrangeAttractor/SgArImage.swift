@@ -71,12 +71,14 @@ extension StrangeAttractor.Image {
 
     func decorate(image: NSImage, text: String) -> NSImage {
         let size = image.size
-        image.lockFocus()
-        let textColor: NSColor = .white
-        let attr: [NSAttributedString.Key: Any] = [ .foregroundColor: textColor ]
-        text.draw(at: CGPoint(x: 4, y: size.height-14), withAttributes: attr)
-        image.unlockFocus()
-        return image
+        let bm = Bitmap(size: size)
+        let cgImg = bm.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: size))
+            let textColor: NSColor = .white
+            let attr: [NSAttributedString.Key: Any] = [ .foregroundColor: textColor ]
+            text.draw(at: CGPoint(x: 4, y: size.height-14), withAttributes: attr)
+        }
+        return NSImage(cgImage: cgImg, size: size)
     }
 
     func save(image: NSImage, toFileName name: String) throws {
