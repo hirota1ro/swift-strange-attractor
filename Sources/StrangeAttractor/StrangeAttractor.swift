@@ -5,7 +5,7 @@ import ArgumentParser
 struct StrangeAttractor: ParsableCommand {
     static var configuration = CommandConfiguration(
       abstract: "Utilities for Strange Attractors.",
-      subcommands: [Image.self, Search.self, Mutation.self, Export.self, List.self],
+      subcommands: [Image.self, Search.self, Mutation.self, Export.self, List.self, Catalog.self],
       defaultSubcommand: Image.self,
       helpNames: [.long, .customShort("?")])
 }
@@ -129,5 +129,30 @@ extension StrangeAttractor {
 
         @Option(name: .shortAndLong, help: "output file path")
         var outputFile: String?
+    }
+}
+
+extension StrangeAttractor {
+    struct Catalog: ParsableCommand {
+        static var configuration
+          = CommandConfiguration(abstract: "output catalog image file attractor-names.")
+
+        @Argument(help: "input *.png file names")
+        var inputFiles: [String]
+
+        @Option(name: .shortAndLong, help: "output png file path")
+        var outputFile: String?
+
+        @Option(name: .shortAndLong, help: "parameter name for x-axis")
+        var xAxis: String = "a"
+
+        @Option(name: .shortAndLong, help: "parameter name for y-axis")
+        var yAxis: String = "b"
+
+        @Flag(name: .long, help: "debug mode")
+        var debug: Bool = false
+
+        @Flag(name: .shortAndLong, help: "dark mode")
+        var dark: Bool = false
     }
 }
